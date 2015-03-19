@@ -1,0 +1,38 @@
+var fs = require("fs");
+var js2xmlparser = require("js2xmlparser");
+console.log("Started reading a file");
+//read the json file
+
+fs.readFile("source.json", function(error, data) {
+    console.log("Content of file: " + data);
+	//parse the received data into json object
+    var studentObject = JSON.parse(data);
+
+	console.log(js2xmlparser("students", studentObject));
+	var xmlData = js2xmlparser("students", studentObject);
+
+    console.log("First Record: ", studentObject.student[0]);
+
+  	//sort the jsonArray
+	var sortedObj = studentObject.student.sort(function(a,b) { return  parseInt(b.score) - parseInt(a.score)  } );
+	console.log("sortedObj: "+sortedObj);
+
+	//heading line for the text file
+    var wholeDataString = "ID  |  FName  |  LName  |  Score" + "\n";
+
+    for (var i = 0; i < sortedObj.length; i++) 
+    {
+        //concat each record to a varible
+      	wholeDataString = wholeDataString + sortedObj[i].id + " |  " + sortedObj[i].fName + "  |  " + sortedObj[i].lName + "  |  " + sortedObj[i].score + "\n";
+
+        console.log("Students" + ": " + sortedObj[i].id + " |  " + sortedObj[i].fName + "  |  " + sortedObj[i].lName + "  |  " + sortedObj[i].score + "\n");
+    }
+
+    console.log("wholeDataString: " + "\n" + wholeDataString);
+	//writting all the data at once
+    fs.writeFile("Destination.txt", xmlData, function(error, data) {
+        console.log("Wrote to the file");
+    });
+
+});
+console.log("finished executing");

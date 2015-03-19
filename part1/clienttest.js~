@@ -1,0 +1,14 @@
+var fromJsonFileToTextFile = require('/home/mindstix/nodejsPractical/Lab Node2/part1/prac1.js');
+var fromJsonFileToTextFileSortedData = require('/home/mindstix/nodejsPractical/Lab Node2/part2/prac1.js');
+
+
+console.log('Client starting');
+console.log('Starting part1')
+var testMyPart1Module = fromJsonFileToTextFile.FromJsonFileToTextFile('source.json', 'destination.txt');
+console.log('Finished part1 !');
+
+console.log('Starting part2');
+var testMyPart2Module = fromJsonFileToTextFileSortedData.sortJsonAndSaveToAFile('source.json', 'destination.txt');
+console.log('Finished part2');
+
+console.log('Done Client Execution');
